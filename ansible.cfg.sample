@@ -3,4 +3,3 @@ inventory = inventory/default/hosts
 nocolor = true
 host_key_checking = false
 deprecation_warnings = false
-roles_path = ~/.ansible/roles

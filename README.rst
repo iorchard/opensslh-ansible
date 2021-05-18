@@ -16,13 +16,33 @@ Assumptions
 Prepare
 --------
 
-Edit default inventory for your environment.::
+Copy default inventory to your site inventory.::
 
-   $ vi inventory/default/hosts
+   $ cp -a inventory/default inventory/<your_site>
+
+Edit <your site> inventory for your environment.::
+
+   $ vi inventory/<your site>/hosts
+   node1 ansible_connection=local
+   node2
+   node3
+   
+   [deployer]
+   node1
 
 Modify hostname, ip, etc...
 
 Put hostname where you run this playbook in deployer group.
+
+Copy ansible.cfg.sample to ansible.cfg.::
+
+   $ cp ansible.cfg.sample ansible.cfg
+
+Change inventory in ansible.cfg.::
+
+   $ vi ansible.cfg
+   inventory = inventory/<your site>/hosts
+   ...
 
 Change variable values.::
 
@@ -54,8 +74,20 @@ Change openssl_version and openssh_version to the latest one.
 Run
 ----
 
-Now you are ready to run the playbook.::
+Now run the playbook.::
 
    $ ansible-playbook site.yml
 
+If everything goes well, you will see something like this at the end.::
+
+   TASK [openssh : Setup | Check openssh version is matched] **********************
+   ok: [node1] => {
+       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
+   }
+   ok: [node2] => {
+       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
+   }
+   ok: [node] => {
+       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
+   }
 
