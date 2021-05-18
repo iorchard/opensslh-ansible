@@ -42,7 +42,7 @@
     - setup
 
 - name: Copy the new openssl
-  file:
+  copy:
     src: "{{ openssl_dir }}/bin/openssl"
     dest: "/usr/bin/openssl"
     remote_src: yes
