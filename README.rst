@@ -7,9 +7,8 @@ using ansible playbook.
 Assumptions
 -------------
 
-* The first host in inventory file is the ansible controller host.
 * Ansible user in every node has a sudo privilege with NOPASSWD option.
-* Ansible user in controller host can connect to all hosts without 
+* Ansible user in deployer host can connect to all hosts without 
   password prompt. (ssh-key-based login is assumed.)
 * It supports only CentOS 7.
 
@@ -63,11 +62,11 @@ Change variable values.::
    # URL for openssl source tarball (when there is a connection to internet)
    #openssh_src: "https://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz"
 
-If you have an internet connection on ansible controller, 
+If you have an internet connection on deployer, 
 Use URL-based openssl_src and openssh_src.
 
 Or else, get openssl and openssh source tarball and put them in 
-the specified path on ansible controller host.
+the specified path on deployer.
 
 Change openssl_version and openssh_version to the latest one.
 
