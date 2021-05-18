@@ -45,7 +45,7 @@ Change inventory in ansible.cfg.::
 
 Change variable values.::
 
-   $ vi inventory/default/group_vars/all/vars.yml
+   $ vi inventory/<your site>/group_vars/all/vars.yml
    ## openssl
    openssl_version: "1.1.1k"
    
