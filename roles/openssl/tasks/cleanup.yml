@@ -1,0 +1,12 @@
+---
+- name: Remove temporary openssl in /tmp
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/openssl-{{ openssl_version }}"
+    - "/tmp/{{ openssl_dir | basename }}"
+  become: true
+  tags:
+    - cleanup
+...

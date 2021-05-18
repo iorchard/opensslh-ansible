@@ -1,0 +1,11 @@
+taco-std-ctrl1 ansible_connection=local
+taco-std-ctrl2 
+taco-std-ctrl3
+taco-std-comp1 
+taco-std-comp2
+taco-std-ceph1
+taco-std-ceph2
+taco-std-ceph3
+
+[deployer]
+taco-std-ctrl1

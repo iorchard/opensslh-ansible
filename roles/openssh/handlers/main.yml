@@ -1,0 +1,20 @@
+---
+- name: openssh | systemctl daemon-reload
+  systemd:
+    daemon_reload: true
+  become: true
+  register: reload_systemd_daemon
+  failed_when: reload_systemd_daemon.failed
+
+- name: openssh | systemctl restart sshd.service
+  service:
+    name: "sshd.service"
+    state: "restarted"
+    enabled: true
+  delegate_to: "{{ item }}"
+  loop: "{{ ansible_play_hosts }}"
+  become: true
+  run_once: true
+  register: restart_sshd_service
+  failed_when: restart_sshd_service.failed
+...

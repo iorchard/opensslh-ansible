@@ -1,0 +1,8 @@
+---
+- name: Install the latest OpenSSL/OpenSSH
+  any_errors_fatal: true
+  hosts: all
+  roles:
+    - {role: openssl, tags: openssl}
+    - {role: openssh, tags: openssh}
+...

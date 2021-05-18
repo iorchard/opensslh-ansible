@@ -1,0 +1,22 @@
+---
+- name: CentOS7 | Install group packages
+  yum:
+    name: "@Development Tools"
+    state: present
+    update_cache: true
+  delegate_to: "{{ groups['deployer'][0] }}"
+  become: true
+  tags:
+    - preflight
+
+- name: CentOS7 | Install prerequisite packages
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop: "{{ prereq_pkgs }}"
+  delegate_to: "{{ groups['deployer'][0] }}"
+  become: true
+  tags:
+    - preflight
+...

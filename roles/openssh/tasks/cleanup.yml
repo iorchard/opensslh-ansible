@@ -1,0 +1,12 @@
+---
+- name: Remove openssh dir/files in /tmp
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/openssh-{{ openssh_version }}"
+    - "/tmp/openssh.tgz"
+  become: true
+  tags:
+    - cleanup
+...

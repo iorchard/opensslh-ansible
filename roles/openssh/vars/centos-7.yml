@@ -1,0 +1,5 @@
+---
+prereq_pkggroup: "Development Tools"
+prereq_pkgs:
+  - curl
+...

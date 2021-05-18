@@ -1,0 +1,46 @@
+---
+- name: Build | Unarchive openssh source tarball
+  unarchive:
+    src: "{{ openssh_src }}"
+    dest: "/tmp"
+    remote_src: true
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Build | Configure openssh source
+  command:
+    argv:
+      - ./configure
+      - --prefix={{ openssh_dir }}
+      - --with-ssl-dir={{ openssl_dir }}
+      - --with-sysconfdir={{ openssh_sysconfdir }}
+    chdir: /tmp/openssh-{{ openssh_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Build | Make openssh source
+  command:
+    argv:
+      - make
+    chdir: /tmp/openssh-{{ openssh_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Build | Make install
+  command:
+    argv:
+      - make
+      - install
+    chdir: /tmp/openssh-{{ openssh_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  become: true
+  tags:
+    - build
+...

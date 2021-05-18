@@ -1,0 +1,58 @@
+---
+- name: Unarchive source tarball
+  unarchive:
+    src: "{{ openssl_src }}"
+    dest: "/tmp"
+    remote_src: true
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Configure source
+  command:
+    argv:
+      - ./config
+      - --prefix={{ openssl_dir }}
+      - --openssldir={{ openssl_dir }}
+      - shared
+      - zlib
+    chdir: /tmp/openssl-{{ openssl_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Make source
+  command:
+    argv:
+      - make
+    chdir: /tmp/openssl-{{ openssl_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Make test
+  command:
+    argv:
+      - make
+      - test
+    chdir: /tmp/openssl-{{ openssl_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - build
+
+- name: Make install
+  command:
+    argv:
+      - make
+      - install
+    chdir: /tmp/openssl-{{ openssl_version }}
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  become: true
+  tags:
+    - build
+...

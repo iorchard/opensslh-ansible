@@ -1,0 +1,17 @@
+---
+## openssl
+openssl_version: "1.1.1k"
+
+# absolute file path for openssl source tarball (no internet environment)
+openssl_src: "/tmp/openssl-{{ openssl_version }}.tar.gz"
+# URL for openssl source tarball (when there is a connection to internet)
+#openssl_src: "https://www.openssl.org/source/openssl-{{ openssl_version }}.tar.gz"
+
+# openssh
+openssh_version: "8.6p1"
+
+# absolute file path for openssh source tarball (no internet environment)
+openssh_src: "/tmp/openssh-{{ openssh_version }}.tar.gz"
+# URL for openssl source tarball (when there is a connection to internet)
+#openssh_src: "https://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz"
+...
