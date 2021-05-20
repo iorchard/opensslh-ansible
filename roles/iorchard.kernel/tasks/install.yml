@@ -33,7 +33,7 @@
 
 - name: Install | List the installed kernels (version-release)
   debug:
-    msg: "installed kernel: {% for r in kernel_list.results %}{% if r.yumstate == 'installed' %}{{ r.version }}-{{ r.release }} {%  endif %}{%  endfor %}
+    msg: "installed kernel: {% for r in kernel_list.results %}{% if r.yumstate == 'installed' %}{{ r.version }}-{{ r.release }} {%  endif %}{%  endfor %}"
   tags:
     - install
 ...

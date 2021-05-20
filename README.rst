@@ -1,8 +1,7 @@
-OpenSSL/OpenSSH Upgrade Ansible Playbook
-==========================================
+Sysharden Ansible Playbook
+===========================
 
-This is a guide to upgrade OpenSSL and OpenSSH to the latest
-using ansible playbook.
+Sysharden ansible playbook installs the latest OpenSSL, OpenSSH, and Kernel.
 
 Assumptions
 -------------
@@ -10,7 +9,7 @@ Assumptions
 * Ansible user in every node has a sudo privilege with NOPASSWD option.
 * Ansible user in deployer host can connect to all hosts without 
   password prompt. (ssh-key-based login is assumed.)
-* It supports only CentOS 7.
+* It supports only CentOS 7 at the moment.
 
 Prepare
 --------
@@ -22,16 +21,15 @@ Copy default inventory to your site inventory.::
 Edit <your site> inventory for your environment.::
 
    $ vi inventory/<your site>/hosts
-   node1 ansible_connection=local
-   node2
-   node3
+   node1    ansible_host=<ip_address> ansible_connection=local
+   node2    ansible_host=<ip_address>
+   node3    ansible_host=<ip_address>
    
    [deployer]
    node1
 
-Modify hostname, ip, etc...
-
-Put hostname where you run this playbook in deployer group.
+Modify hostname and ip address (Use management ip address).
+The hostname in deployer group is the host where you run this playbook.
 
 Copy ansible.cfg.sample to ansible.cfg.::
 
@@ -62,15 +60,22 @@ Change variable values.::
    # URL for openssl source tarball (when there is a connection to internet)
    #openssh_src: "https://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz"
 
+   ## kernel
+   # absolute file path for openssh source tarball (no internet environment)
+   kernel_pkg: "/tmp/kernel-3.10.0-1160.25.1.el7.x86_64.rpm"
+   # URL for openssl source tarball (if deployer has internet conneciton)
+   #kernel_pkg: http://ftp.kaist.ac.kr/CentOS/7.9.2009/updates/x86_64/Packages/kernel-3.10.0-1160.25.1.el7.x86_64.rpm
+
+Change openssl_version and openssh_version to the latest.
+
 If you have an internet connection on deployer, 
 Use URL-based openssl_src and openssh_src.
 
-Or else, get openssl and openssh source tarball and put them in 
-the specified path on deployer.
+Or else, get source tarball and kernel rpm package and put them in 
+the specified paths on deployer.
 
-Change openssl_version and openssh_version to the latest one.
 
-Check every node is reachable.::
+Check if every node is reachable.::
 
    $ ansible -m ping all
    node1 | SUCCESS => {
@@ -94,7 +99,7 @@ Now run the playbook.::
 
    $ ansible-playbook site.yml
 
-If everything goes well, you will see something like this at the end.::
+If everything goes well, you will see the upgrade info.::
 
    TASK [openssh : Setup | Check openssh version is matched] **********************
    ok: [node1] => {
