@@ -1,0 +1,39 @@
+---
+- name: Install | Get kernel package
+  get_url:
+    url: "{{ kernel_pkg }}"
+    dest: "/tmp/{{ kernel_pkg | basename }}"
+  delegate_to: "{{ groups['deployer'][0] }}"
+  run_once: true
+  tags:
+    - install
+
+- name: Install | Copy kernel package to other hosts
+  copy:
+    src: "/tmp/{{ kernel_pkg | basename }}"
+    dest: "/tmp/{{ kernel_pkg | basename }}"
+  when: inventory_hostname != groups['deployer'][0]
+  tags:
+    - install
+
+- name: Install | Install kernel
+  yum:
+    name: "{{ kernel_pkg }}"
+    state: present
+  become: true
+  tags:
+    - install
+
+- name: Install | Get the installed kernel packages
+  yum:
+    list: kernel
+  register: kernel_list
+  tags:
+    - install
+
+- name: Install | List the installed kernels (version-release)
+  debug:
+    msg: "installed kernel: {% for r in kernel_list.results %}{% if r.yumstate == 'installed' %}{{ r.version }}-{{ r.release }} {%  endif %}{%  endfor %}
+  tags:
+    - install
+...

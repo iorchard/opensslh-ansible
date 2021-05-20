@@ -3,6 +3,7 @@
   any_errors_fatal: true
   hosts: all
   roles:
-    - {role: openssl, tags: openssl}
-    - {role: openssh, tags: openssh}
+    - {role: iorchard.openssl, tags: openssl}
+    - {role: iorchard.openssh, tags: openssh}
+    - {role: iorchard.kernel, tags: kernel}
 ...
