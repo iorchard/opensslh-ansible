@@ -1,0 +1,4 @@
+---
+prereq_pkgs:
+  - linux-firmware
+...

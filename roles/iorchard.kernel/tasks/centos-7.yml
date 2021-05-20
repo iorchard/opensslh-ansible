@@ -1,0 +1,11 @@
+---
+- name: CentOS7 | Install prerequisite packages
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop: "{{ prereq_pkgs }}"
+  become: true
+  tags:
+    - preflight
+...
