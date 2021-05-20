@@ -105,27 +105,27 @@ at the end of each role.::
    ...
    TASK [iorchard.openssl : Check openssl version is matched] *********************
    Thursday 20 May 2021  18:40:23 +0900 (0:00:00.345)       0:10:13.932 **********
-   ok: [node-1] => {
+   ok: [node1] => {
        "msg": "openssl version: 1.1.1k openssl version from command: 1.1.1k"
    }
-   ok: [node-2] => {
+   ok: [node2] => {
        "msg": "openssl version: 1.1.1k openssl version from command: 1.1.1k"
    }
-   ok: [node-0] => {
+   ok: [node3] => {
        "msg": "openssl version: 1.1.1k openssl version from command: 1.1.1k"
    }
    ...
    TASK [iorchard.openssh : Setup | Check openssh version is matched] *************
    Thursday 20 May 2021  18:42:59 +0900 (0:00:00.342)       0:12:49.398 ********** 
-   ok: [node-1] => {
+   ok: [node1] => {
        "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p
    1, OpenSSL 1.1.1k  25 Mar 2021"
    }
-   ok: [node-2] => {
+   ok: [node2] => {
        "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p
    1, OpenSSL 1.1.1k  25 Mar 2021"
    }
-   ok: [node-0] => {
+   ok: [node3] => {
        "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p
    1, OpenSSL 1.1.1k  25 Mar 2021"
    }
@@ -133,16 +133,15 @@ at the end of each role.::
    TASK [iorchard.kernel : Install | List the installed kernels (version-release)] 
    ***
    Thursday 20 May 2021  18:45:48 +0900 (0:00:11.433)       0:15:38.605 ********** 
-   ok: [node-1] => {
+   ok: [node1] => {
        "msg": "installed kernel: 3.10.0-1127.el7 3.10.0-1160.25.1.el7 "
    }
-   ok: [node-0] => {
+   ok: [node2] => {
        "msg": "installed kernel: 3.10.0-1127.el7 3.10.0-1160.25.1.el7 "
    }
-   ok: [node-2] => {
+   ok: [node3] => {
        "msg": "installed kernel: 3.10.0-1127.el7 3.10.0-1160.25.1.el7 "
    }
-
 
 
 Caveat
