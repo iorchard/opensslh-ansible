@@ -99,24 +99,58 @@ Now run the playbook.::
 
    $ ansible-playbook site.yml
 
-If everything goes well, you will see the upgrade info.::
+If everything goes well, you will see the upgrade info
+at the end of each role.::
 
-   TASK [openssh : Setup | Check openssh version is matched] **********************
-   ok: [node1] => {
-       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
+   ...
+   TASK [iorchard.openssl : Check openssl version is matched] *********************
+   Thursday 20 May 2021  18:40:23 +0900 (0:00:00.345)       0:10:13.932 **********
+   ok: [node-1] => {
+       "msg": "openssl version: 1.1.1k openssl version from command: 1.1.1k"
    }
-   ok: [node2] => {
-       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
+   ok: [node-2] => {
+       "msg": "openssl version: 1.1.1k openssl version from command: 1.1.1k"
    }
-   ok: [node3] => {
-       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
+   ok: [node-0] => {
+       "msg": "openssl version: 1.1.1k openssl version from command: 1.1.1k"
    }
+   ...
+   TASK [iorchard.openssh : Setup | Check openssh version is matched] *************
+   Thursday 20 May 2021  18:42:59 +0900 (0:00:00.342)       0:12:49.398 ********** 
+   ok: [node-1] => {
+       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p
+   1, OpenSSL 1.1.1k  25 Mar 2021"
+   }
+   ok: [node-2] => {
+       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p
+   1, OpenSSL 1.1.1k  25 Mar 2021"
+   }
+   ok: [node-0] => {
+       "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p
+   1, OpenSSL 1.1.1k  25 Mar 2021"
+   }
+   ...
+   TASK [iorchard.kernel : Install | List the installed kernels (version-release)] 
+   ***
+   Thursday 20 May 2021  18:45:48 +0900 (0:00:11.433)       0:15:38.605 ********** 
+   ok: [node-1] => {
+       "msg": "installed kernel: 3.10.0-1127.el7 3.10.0-1160.25.1.el7 "
+   }
+   ok: [node-0] => {
+       "msg": "installed kernel: 3.10.0-1127.el7 3.10.0-1160.25.1.el7 "
+   }
+   ok: [node-2] => {
+       "msg": "installed kernel: 3.10.0-1127.el7 3.10.0-1160.25.1.el7 "
+   }
+
 
 
 Caveat
 --------
 
-After upgrading openssh, you may need to remove old host keys 
-in $HOME/.ssh/known_hosts on deployer host since host keys are newly generated.
+* After installing a new openssh, you may need to remove old host keys in 
+  $HOME/.ssh/known_hosts on deployer host since host keys are newly generated.
 
+* After installing a new kernel, you need to reboot each machine 
+  to boot in the new kernel.
 
