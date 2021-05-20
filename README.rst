@@ -91,7 +91,10 @@ If everything goes well, you will see something like this at the end.::
    }
 
 
-Caveat)
+Caveat
+--------
+
 After upgrading openssh, you may need to remove old host keys 
 in $HOME/.ssh/known_hosts on deployer host since host keys are newly generated.
+
 
