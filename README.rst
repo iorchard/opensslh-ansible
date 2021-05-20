@@ -86,7 +86,7 @@ If everything goes well, you will see something like this at the end.::
    ok: [node2] => {
        "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
    }
-   ok: [node] => {
+   ok: [node3] => {
        "msg": "desired openssh version: 8.6p1 current openssh version: OpenSSH_8.6p1, OpenSSL 1.1.1k  25 Mar 2021"
    }
 
