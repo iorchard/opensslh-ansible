@@ -70,6 +70,23 @@ the specified path on deployer.
 
 Change openssl_version and openssh_version to the latest one.
 
+Check every node is reachable.::
+
+   $ ansible -m ping all
+   node1 | SUCCESS => {
+       "changed": false, 
+       "ping": "pong"
+   }
+   node2 | SUCCESS => {
+       "changed": false, 
+       "ping": "pong"
+   }
+   node3 | SUCCESS => {
+       "changed": false, 
+       "ping": "pong"
+   }
+
+
 Run
 ----
 
