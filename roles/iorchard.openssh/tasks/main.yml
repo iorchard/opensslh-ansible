@@ -47,4 +47,9 @@
   include_tasks: setup.yml
   tags:
     - setup
+
+- name: Clean up
+  include_tasks: cleanup.yml
+  tags:
+    - cleanup
 ...

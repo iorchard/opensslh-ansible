@@ -93,11 +93,6 @@
 - name: Setup | Force all notified handlers to run now
   meta: flush_handlers
 
-- name: Clean up
-  include_tasks: cleanup.yml
-  tags:
-    - cleanup
-
 - name: Setup | Run ssh -V
   command: ssh -V
   register: openssh_version_ret

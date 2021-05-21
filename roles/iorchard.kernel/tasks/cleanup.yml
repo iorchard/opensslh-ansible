@@ -1,0 +1,11 @@
+---
+- name: Remove temporary file in /tmp
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/kernel.rpm"
+  become: true
+  tags:
+    - cleanup
+...

@@ -42,4 +42,9 @@
   include_tasks: install.yml
   tags:
     - install
+
+- name: Clean up
+  include_tasks: cleanup.yml
+  tags:
+    - cleanup
 ...
