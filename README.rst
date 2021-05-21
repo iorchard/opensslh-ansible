@@ -21,12 +21,12 @@ Copy default inventory to your site inventory.::
 Edit <your site> inventory for your environment.::
 
    $ vi inventory/<your site>/hosts
-   node1    ansible_host=<ip_address> ansible_connection=local
-   node2    ansible_host=<ip_address>
-   node3    ansible_host=<ip_address>
+   node-0   ansible_host=<ip_address> ansible_connection=local
+   node-1   ansible_host=<ip_address>
+   node-2   ansible_host=<ip_address>
    
    [deployer]
-   node1
+   node-0
 
 Modify hostname and ip address (Use management ip address).
 The hostname in deployer group is the host where you run this playbook.
@@ -78,15 +78,15 @@ the specified paths on deployer.
 Check if every node is reachable.::
 
    $ ansible -m ping all
-   node1 | SUCCESS => {
+   node-0 | SUCCESS => {
        "changed": false, 
        "ping": "pong"
    }
-   node2 | SUCCESS => {
+   node-1 | SUCCESS => {
        "changed": false, 
        "ping": "pong"
    }
-   node3 | SUCCESS => {
+   node-2 | SUCCESS => {
        "changed": false, 
        "ping": "pong"
    }

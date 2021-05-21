@@ -1,6 +1,6 @@
-node1   ansible_host=<ip_address> ansible_connection=local
-node2   ansible_host=<ip_address>
-node3   ansible_host=<ip_address>
+node-0   ansible_host=<ip_address> ansible_connection=local
+node-1   ansible_host=<ip_address>
+node-2   ansible_host=<ip_address>
 
 [deployer]
-node1
+node-0
