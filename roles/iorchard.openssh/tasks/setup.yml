@@ -27,10 +27,22 @@
   tags:
     - setup
 
+- name: Setup | Get the old openssh version
+  command: ssh -V
+  register: old_version_ret
+  tags:
+    - setup
+
+- name: Setup | Set old openssh version
+  set_fact:
+    old_openssh_version: "{{ old_version_ret.stderr | regex_replace('^[A-Za-z]+_([0-9\\.a-z]+).*$', '\\1') }}"
+  tags:
+    - setup
+
 - name: Setup | Back up the old ssh
   copy:
     src: "/usr/bin/ssh"
-    dest: "/usr/bin/ssh.bak"
+    dest: "/usr/bin/ssh-{{ old_openssh_version }}"
     remote_src: yes
   become: true
   tags:
@@ -39,7 +51,7 @@
 - name: Setup | Back up the old sshd
   copy:
     src: "/usr/sbin/sshd"
-    dest: "/usr/sbin/sshd.bak"
+    dest: "/usr/sbin/sshd-{{ old_openssh_version }}"
     remote_src: yes
   become: true
   tags:
@@ -96,7 +108,7 @@
 
 - name: Setup | Check openssh version is matched
   debug:
-    msg: "desired openssh version: {{ openssh_version }} current openssh version: {{ openssh_version_ret.stderr }}"
+    msg: "Desired openssh version: {{ openssh_version }} | Installed openssh version: {{ openssh_version_ret.stderr }}"
   failed_when: openssh_version != openssh_command_version
   tags:
     - setup

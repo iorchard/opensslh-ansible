@@ -16,9 +16,13 @@ openssh_src: "/tmp/openssh-{{ openssh_version }}.tar.gz"
 # URL for openssl source tarball (if deployer has internet conneciton)
 #openssh_src: "https://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz"
 
+
 ## kernel
-# Use file-based URL for openssh source tarball (no internet)
-kernel_pkg: "file:///tmp/kernel-3.10.0-1160.25.1.el7.x86_64.rpm"
-# http-based URL for openssl source tarball (if it has internet conneciton)
-#kernel_pkg: http://ftp.kaist.ac.kr/CentOS/7.9.2009/updates/x86_64/Packages/kernel-3.10.0-1160.25.1.el7.x86_64.rpm
+kernel_version: "3.10.0"
+kernel_release: "1160.25.1"
+
+# Use file-based URL for kernel rpm package (no internet)
+kernel_pkg: "/tmp/kernel-{{ kernel_version }}-{{ kernel_release }}.el7.x86_64.rpm"
+# http-based URL for kernel rpm package (if deployer has internet conneciton)
+#kernel_pkg: http://ftp.kaist.ac.kr/CentOS/7.9.2009/updates/x86_64/Packages/kernel-{{ kernel_version }}-{{ kernel_release }}.el7.x86_64.rpm
 ...

@@ -1,6 +1,6 @@
 ---
 openssl_version: "1.1.1k"
 openssl_src: "https://www.openssl.org/source/openssl-{{ openssl_version }}.tar.gz"
-openssl_dir: "/usr/local/ssl"
+openssl_dir: "/opt/openssl-{{ openssl_version }}"
 openssl_ldconf: "/etc/ld.so.conf.d/99-openssl.conf"
 ...

@@ -1,5 +1,5 @@
 ---
-- name: Unarchive source tarball
+- name: Build | Unarchive source tarball
   unarchive:
     src: "{{ openssl_src }}"
     dest: "/tmp"
@@ -9,7 +9,7 @@
   tags:
     - build
 
-- name: Configure source
+- name: Build | Configure source
   command:
     argv:
       - ./config
@@ -23,7 +23,7 @@
   tags:
     - build
 
-- name: Make source
+- name: Build | Make source
   command:
     argv:
       - make
@@ -33,7 +33,7 @@
   tags:
     - build
 
-- name: Make test
+- name: Build | Make test
   command:
     argv:
       - make
@@ -44,7 +44,7 @@
   tags:
     - build
 
-- name: Make install
+- name: Build | Make install
   command:
     argv:
       - make

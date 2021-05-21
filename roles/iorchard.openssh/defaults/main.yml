@@ -1,7 +1,8 @@
 ---
 openssh_version: "8.6p1"
+openssl_version: "1.1.1k"
 openssh_src: "https://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz"
-openssh_dir: "/usr/local/openssh"
-openssl_dir: "/usr/local/ssl"
+openssh_dir: "/opt/openssh-{{ openssh_version }}"
+openssl_dir: "/opt/openssl-{{ openssl_version }}"
 openssh_sysconfdir: "/etc/ssh"
 ...

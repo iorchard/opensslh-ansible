@@ -1,5 +1,5 @@
 ---
-- name: Synchronize openssl artifacts over all nodes
+- name: Setup | Synchronize openssl artifacts over all nodes
   synchronize:
     src: "{{ openssl_dir }}"
     dest: "/tmp"
@@ -8,7 +8,7 @@
   tags:
     - setup
 
-- name: Synchronize openssl directory from tmp on all nodes
+- name: Setup | Synchronize openssl directory from tmp on all nodes
   synchronize:
     src: "/tmp/{{ openssl_dir | basename }}"
     dest: "{{ openssl_dir | dirname }}"
@@ -18,7 +18,7 @@
   tags:
     - setup
 
-- name: Add openssl library in ldconfig
+- name: Setup | Add openssl library in ldconfig
   copy:
     content: "{{ openssl_dir }}/lib"
     dest: "{{ openssl_ldconf }}"
@@ -26,22 +26,34 @@
   tags:
     - setup
   
-- name: Reload dynamic run-time libraries
+- name: Setup | Reload dynamic run-time libraries
   command: ldconfig
   become: true
   tags:
     - setup
 
-- name: Back up the old openssl
+- name: Setup | Get the old openssl version
+  command: openssl version
+  register: old_version_ret
+  tags:
+    - setup
+
+- name: Setup | Set openssl command version
+  set_fact:
+    old_openssl_version: "{{ old_version_ret.stdout | regex_replace('^[A-Za-z]+ ([0-9\\.a-z]+) .*$', '\\1') }}"
+  tags:
+    - setup
+
+- name: Setup | Back up the old openssl
   copy:
     src: "/usr/bin/openssl"
-    dest: "/usr/bin/openssl.bak"
+    dest: "/usr/bin/openssl-{{ old_openssl_version }}"
     remote_src: yes
   become: true
   tags:
     - setup
 
-- name: Copy the new openssl
+- name: Setup | Copy the new openssl
   copy:
     src: "{{ openssl_dir }}/bin/openssl"
     dest: "/usr/bin/openssl"
@@ -50,21 +62,21 @@
   tags:
     - setup
 
-- name: Run openssl version
+- name: Setup | Run openssl version
   command: openssl version
   register: openssl_version_ret
   tags:
     - setup
 
-- name: Set openssl command version
+- name: Setup | Set openssl command version
   set_fact:
     openssl_command_version: "{{ openssl_version_ret.stdout | regex_replace('^[A-Za-z]+ ([0-9\\.a-z]+) .*$', '\\1') }}"
   tags:
     - setup
 
-- name: Check openssl version is matched
+- name: Test | Check openssl version is matched
   debug:
-    msg: "openssl version: {{ openssl_version }} openssl version from command: {{ openssl_command_version }}"
+    msg: "Desired openssl version: {{ openssl_version }} | Installed openssl version: {{ openssl_command_version }}"
   failed_when: openssl_version != openssl_command_version
   tags:
     - setup

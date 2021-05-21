@@ -1,6 +1,9 @@
 ---
+kernel_version: "3.10.0"
+kernel_release: "1160.25.1"
+
 # absolute path of kernel package rpm file
-kernel_pkg: "/tmp/kernel-3.10.0-1160.25.1.el7.x86_64.rpm"
+kernel_pkg: "/tmp/kernel-{{ kernel_version }}-{{ kernel_release }}.el7.x86_64.rpm"
 # URL for openssl source tarball (if deployer has internet conneciton)
-#kernel_pkg: http://ftp.kaist.ac.kr/CentOS/7.9.2009/updates/x86_64/Packages/kernel-3.10.0-1160.25.1.el7.x86_64.rpm
+#kernel_pkg: http://ftp.kaist.ac.kr/CentOS/7.9.2009/updates/x86_64/Packages/kernel-{{ kernel_version }}-{{ kernel_release }}.el7.x86_64.rpm
 ...
