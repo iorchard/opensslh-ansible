@@ -44,6 +44,7 @@
     src: "/usr/bin/ssh"
     dest: "/usr/bin/ssh-{{ old_openssh_version }}"
     remote_src: yes
+    mode: "0755"
   become: true
   tags:
     - setup
@@ -53,6 +54,7 @@
     src: "/usr/sbin/sshd"
     dest: "/usr/sbin/sshd-{{ old_openssh_version }}"
     remote_src: yes
+    mode: "0755"
   become: true
   tags:
     - setup
@@ -62,6 +64,7 @@
     src: "{{ openssh_dir }}/bin/ssh"
     dest: "/usr/bin/ssh"
     remote_src: yes
+    mode: "0755"
   become: true
   tags:
     - setup
@@ -71,6 +74,7 @@
     src: "{{ openssh_dir }}/sbin/sshd"
     dest: "/usr/sbin/sshd"
     remote_src: yes
+    mode: "0755"
   become: true
   tags:
     - setup

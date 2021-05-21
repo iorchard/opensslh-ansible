@@ -49,6 +49,7 @@
     src: "/usr/bin/openssl"
     dest: "/usr/bin/openssl-{{ old_openssl_version }}"
     remote_src: yes
+    mode: "0755"
   become: true
   tags:
     - setup
@@ -58,6 +59,7 @@
     src: "{{ openssl_dir }}/bin/openssl"
     dest: "/usr/bin/openssl"
     remote_src: yes
+    mode: "0755"
   become: true
   tags:
     - setup

@@ -139,6 +139,17 @@ at the end of each role.::
        "msg": "Desired kernel: 3.10.0-1160.25.1 | Installed kernels: 3.10.0-1127.el7, 3.10.0-1160.25.1.el7, "
    }
 
+Installed Directories
+-----------------------
+
+* openssl: /opt/openssl-<version>
+* openssh: /opt/openssh-<version>
+
+Backup files
+----------------
+
+* openssl: /usr/bin/openssl-<version>
+* openssh: /usr/bin/ssh-<version>, /usr/sbin/sshd-<version>
 
 Caveat
 --------
