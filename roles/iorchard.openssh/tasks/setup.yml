@@ -106,7 +106,7 @@
   tags:
     - setup
 
-- name: Setup | Check openssh version is matched
+- name: Test | Check openssh version is matched
   debug:
     msg: "Desired openssh version: {{ openssh_version }} | Installed openssh version: {{ openssh_version_ret.stderr }}"
   failed_when: openssh_version != openssh_command_version

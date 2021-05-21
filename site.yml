@@ -1,5 +1,5 @@
 ---
-- name: Install the latest OpenSSL/OpenSSH
+- name: System hardening
   any_errors_fatal: true
   hosts: all
   roles:

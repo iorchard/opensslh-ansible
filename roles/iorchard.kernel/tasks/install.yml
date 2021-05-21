@@ -31,9 +31,9 @@
   tags:
     - install
 
-- name: Install | List the installed kernels (version-release)
+- name: Test | List the installed kernels (version-release)
   debug:
-    msg: "Desired kernel: {{ kernel_version }}-{{ kernel_release }} | Installed kernels: {% for r in kernel_list.results %}{% if r.yumstate == 'installed' %}{{ r.version }}-{{ r.release }} {%  endif %}{%  endfor %}"
+    msg: "Desired kernel: {{ kernel_version }}-{{ kernel_release }} | Installed kernels: {% for r in kernel_list.results %}{% if r.yumstate == 'installed' %}{{ r.version }}-{{ r.release }}, {%  endif %}{%  endfor %}"
   tags:
     - install
 ...
