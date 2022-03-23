@@ -139,6 +139,23 @@ at the end of each role.::
        "msg": "Desired kernel: 3.10.0-1160.25.1 | Installed kernels: 3.10.0-1127.el7, 3.10.0-1160.25.1.el7, "
    }
 
+If you want to run each role, use --tags.
+
+To run openssl role.::
+
+   $ ansible-playbook --tags openssl site.yml
+
+To run openssh role.::
+
+   $ ansible-playbook --tags openssh site.yml
+
+Always run openssl role before openssh role since openssh role depends on
+openssl role.
+
+To run kernel role.::
+
+   $ ansible-playbook --tags kernel site.yml
+
 Installed Directories
 -----------------------
 
